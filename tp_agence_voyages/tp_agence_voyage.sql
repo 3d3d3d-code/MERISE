@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS orders (
     client_id INT,
     trip_code INT,
     order_quantity TINYINT NOT NULL,
-    order_paid BIGINT NOT NULL,
+    order_paid TINYINT NOT NULL,
     PRIMARY KEY (client_id , trip_code),
     FOREIGN KEY (client_id)
         REFERENCES clients (client_id),
@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS steps (
     FOREIGN KEY (trip_code)
         REFERENCES trips (trip_code)
 )engine=InnoDb CHARSET utf8 COLLATE utf8_general_ci;
+
 CREATE TABLE IF NOT EXISTS suggest (
     trip_code INT,
     theme_code INT,
