@@ -1,3 +1,5 @@
+
+DROP DATABASE agence_voyage;
 CREATE DATABASE agence_voyage ;
 USE agence_voyage ;
 
@@ -47,25 +49,23 @@ CREATE TABLE themes(
 );
 
 CREATE TABLE services(
-   service_code INT,
+   service_code INT PRIMARY KEY,
    service_name VARCHAR(32) NOT NULL,
-   service_description TEXT,
-   PRIMARY KEY(service_code)
+   service_description TEXT
+
 );
 
 CREATE TABLE clients(
-   client_id INT,
+   client_id INT PRIMARY KEY NOT NULL,
    client_lastname VARCHAR(32) NOT NULL,
    client_firstname VARCHAR(32) NOT NULL,
-   client_email VARCHAR(128) NOT NULL,
-   client_phone CHAR(16) NOT NULL,
+   client_email VARCHAR(128) UNIQUE NOT NULL,
+   client_phone CHAR(16) UNIQUE NOT NULL,
    client_added DATE NOT NULL,
    client_password CHAR(60) NOT NULL,
    com_code CHAR(5) NOT NULL,
-   PRIMARY KEY(client_id),
-   UNIQUE(client_email),
-   UNIQUE(client_phone),
-   FOREIGN KEY(com_code) REFERENCES sales(com_code)
+
+ CONSTRAINT fk_Code  FOREIGN KEY(com_code) REFERENCES sales(com_code)
 );
 
 CREATE TABLE orders(
@@ -106,3 +106,5 @@ CREATE TABLE suggest(
    FOREIGN KEY(trip_code) REFERENCES trips(trip_code),
    FOREIGN KEY(theme_code) REFERENCES themes(theme_code)
 );
+
+
