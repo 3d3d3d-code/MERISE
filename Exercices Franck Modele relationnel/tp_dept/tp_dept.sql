@@ -64,7 +64,7 @@ INSERT INTO `emp` (`EMPNO`, `ENAME`, `JOB`, `MGR`, `HIREDATE`, `SAL`, `COMM`, `D
 COMMIT;
 
 
--- Premiere partie
+--  PREMIERE PARTIE 
 
 -- QUESTION 1 : Donner nom, job, numéro et salaire de tous les employés, puis seulement des employés du département 10
 
@@ -99,15 +99,15 @@ SELECT `ENAME` FROM `emp`    WHERE `DEPTNO`  ORDER BY (`JOB`)  ;
 
 -- QUESTION 8 Liste des différents emplois
 
-SELECT DISTINCT `JOB` FROM `emp`;
+SELECT DISTINCT `JOB` FROM `emp` ORDER BY JOB ;
 
 -- OU BIEN 
 
-SELECT  `JOB` FROM `emp` GROUP BY `JOB`;
+SELECT  `JOB`, COUNT(*), ROUND(AVG(`SAL`),2)  AS `SALAIRE MOYEN` FROM `emp` GROUP BY `JOB`;
 
 -- QUESTION 9: Donner le nom du département où travaille ALLEN 
 
-SELECT dept.DNAME FROM emp INNER JOIN dept ON emp.DEPTNO  WHERE ENAME  = 'ALLEN' ; 
+SELECT   dept.DNAME FROM emp INNER JOIN dept ON emp.DEPTNO  WHERE ENAME  = 'allen' ; 
 
 SELECT dept.DNAME FROM  emp,dept WHERE emp.DEPTNO =dept.DEPTNO AND  ENAME ='ALLEN' ;
                                                                 
@@ -123,13 +123,28 @@ SELECT `ENAME`,`SAL`,`COMM`,(`SAL` + `COMM`) FROM `emp` WHERE `JOB`= 'SALESMAN' 
 
 
 -- QUESTION 12  Liste des employés du département 20: nom, job, date d'embauche sous forme VEN 28 FEV 1997'
-SELECT `ENAME`||`JOB`||TO_CHAR(HIREDATE,'DAY, DD MONTH YYYY')FROM `emp` WHERE `DEPTNO` IN(20)  ORDER BY (`ENAME`)    ; 
+SET lc_time_names = `fr_FR` ;
+SELECT `ENAME`,`JOB`,DATE_FORMAT(HIREDATE,'%a %e %b %Y') FROM `emp` WHERE `DEPTNO` IN(20)  ORDER BY (`ENAME`)    ; 
 
 -- QUESTION 13 : Donner le salaire le plus élevé par département
 
-SELECT * FROM`emp` where `SAL`ORDER BY `DEPTNO`;
+SELECT DNAME, dept.DEPTNO, MAX(SAL) AS `SALAIRE MAX` FROM `emp`,`dept` WHERE dept.deptno=emp.deptno GROUP BY DNAME ,dept.DEPTNO;
 
 -- QUESTION 14 : Donner département par département masse salariale, nombre d'employés, salaire moyen par type d'emploi.
+
+                                                                 
+
+-- QUESTION 15 :Même question mais on se limite aux sous-ensembles d'au moins 2 employés
+
+-- QUESTION 16 : Liste des employés (Nom, département, salaire) de même emploi que JONES
+
+SELECT job,ename,dname,sal FROM emp,dept WHERE emp.deptno = dept.deptno AND JOB=(SELECT JOB FROM emp where ename = 'JONES');
+
+
+
+-- DEUXIEME PARTIE   
+-- QUESTION 5 :
+SELECT ename FROM dept.DEPTNO inner join emp.DEPTNO where loc= 'DALLAS';
 
 
 
