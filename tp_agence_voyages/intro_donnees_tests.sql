@@ -1,12 +1,24 @@
 -- DQL = Langage de  Requêtes sur les données
 -- SELECT
 
-USE db_trips;
+USE tp_agence_voyages;
 
 
 -- sélectionner tous les pays;
 SELECT * FROM countries;
 
-SELECT * FROM countries ORDER BY country_name ASC;
+SELECT * FROM cities;
 
-SELECT * FROM countries ORDER BY country_name DESC;
+SELECT * FROM themes;
+
+SELECT * FROM services;
+
+SELECT * FROM sales;
+
+SELECT * FROM clients;
+
+SELECT * FROM trips;
+
+SELECT * FROM suggests;
+
+SELECT * FROM orders;
