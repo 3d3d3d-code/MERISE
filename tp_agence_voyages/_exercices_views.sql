@@ -5,6 +5,7 @@ use tp_agence_voyages;
 -- SELECT*FROM CITIES INNER JOIN COUNTRIES ;
 -- 1) Afficher les informations de toutes les villes (informations du pays incluses)
 DROP VIEW IF EXISTS view_cities ;
+
 CREATE VIEW view_cities
 AS
 SELECT cities.*,countries.country_name
@@ -21,6 +22,22 @@ JOIN cities ON cities.country_code = countries.country_code ;
 
 -- 2) Afficher les noms, prénoms, email de tous les clients qui ont réservé au moins 1 voyage. 
 --    On a besoin de connaitre le titre du voyage ainsi que le pays de destination
+
+  CREATE VIEW order_info
+  AS SELECT client_lastname,client_firstname, client_email,trip_title,country_name
+  FROM clients  JOIN orders  ON clients.client_id=orders.client_id  ;
+
+    
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
  
 
 
